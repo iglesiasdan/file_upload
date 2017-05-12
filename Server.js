@@ -10,7 +10,14 @@ var storage	=	multer.diskStorage({
   }
 });
 var upload = multer({ storage : storage}).single('userPhoto');
+app.use(function(req,res,next){
 
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+	console.log('Se hizo una peticion el '+ Date.now());
+	next();
+});
 app.get('/',function(req,res){
       res.sendFile(__dirname + "/index.html");
 });
